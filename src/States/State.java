@@ -3,6 +3,7 @@ package States;
 import Main.Game;
 import Main.Handler;
 
+import javax.swing.*;
 import java.awt.*;
 
 public abstract class State {
@@ -10,7 +11,10 @@ public abstract class State {
     private static State CurrentState = null;
     public static void SetState (State state) /// Game State Manager
     {
-        CurrentState= state; /// se da starea curenta
+        CurrentState = state; /// se da starea curenta
+//        JLabel background=new JLabel(new ImageIcon("/textures/braun_hogenber.jpg"));
+//        background.add(background);
+//        background.setLayout(new FlowLayout());
     }
     public static State getState ( )
     {
@@ -23,4 +27,5 @@ public abstract class State {
     }
     public abstract void update ( );
     public abstract void render (Graphics graph);
+
 }

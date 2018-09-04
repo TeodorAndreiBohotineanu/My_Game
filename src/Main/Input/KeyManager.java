@@ -5,7 +5,8 @@ import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener
 {
-    public boolean Up, Down, Left, Right,Up_2,Down_2,Left_2,Right_2;
+    public boolean Up, Down, Left, Right, Jump;
+    public boolean aUp,aDown,aLeft,aRight; /// attack up/down/left/right;
     private boolean[] Keys;
     public KeyManager( )
     {
@@ -17,10 +18,12 @@ public class KeyManager implements KeyListener
         Down = Keys[KeyEvent.VK_S];
         Left = Keys[KeyEvent.VK_A];
         Right = Keys[KeyEvent.VK_D];
-        Up_2 = Keys[KeyEvent.VK_KP_UP]; /// cand se apasa W se inregistreaza
-        Down_2 = Keys[KeyEvent.VK_KP_DOWN];
-        Left_2 = Keys[KeyEvent.VK_KP_LEFT];
-        Right_2 = Keys[KeyEvent.VK_KP_RIGHT];
+        Jump = Keys[KeyEvent.VK_SPACE];
+
+        aUp = Keys[KeyEvent.VK_UP];
+        aDown = Keys[KeyEvent.VK_DOWN];
+        aLeft = Keys[KeyEvent.VK_LEFT];
+        aRight = Keys[KeyEvent.VK_RIGHT];
     }
     @Override
     public void keyTyped(KeyEvent e)

@@ -1,6 +1,7 @@
 package Main;
 
 import Main.Input.KeyManager;
+import Main.Input.MouseManager;
 import Worlds.World;
 import gfx.GameCamera;
 
@@ -13,11 +14,15 @@ public class Handler {
     }
     public GameCamera getGameCamera( )
     {
-        return game.getGameCamera();
+        return game.getGameCamera( );
     }
     public KeyManager getKeyManager ( )
     {
-        return game.getKeyManager();
+        return game.getKeyManager( );
+    }
+    public MouseManager getMouseManager ( )
+    {
+        return game.getMouseManager( );
     }
     public int getWidth ( )
     {
@@ -27,7 +32,7 @@ public class Handler {
     {
         return game.getHeight();
     }
-    public Game getGame() {
+    public Game getGame( ) {
         return game;
     }
 
@@ -35,7 +40,7 @@ public class Handler {
         this.game = game;
     }
 
-    public World getWorld() {
+    public World getWorld( ) {
         return world;
     }
 

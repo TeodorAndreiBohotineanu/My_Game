@@ -2,6 +2,7 @@ package Main;
 
 import Display.Display;
 import Main.Input.KeyManager;
+import Main.Input.MouseManager;
 import States.GameState;
 import States.MenuState;
 import States.State;
@@ -29,9 +30,10 @@ public class Game implements  Runnable
 
 
     private Thread thread; /// pentru optimizare
-    private State gameState;
-    private State MenuState;
+    public State gameState;
+    public State MenuState;
     private KeyManager keyManager;
+    private MouseManager mouseManager;
     private GameCamera gameCamera;
     private Handler handler;
     public Game(String Title, int width, int height )
@@ -40,21 +42,26 @@ public class Game implements  Runnable
         this.height = height;
         this.Title = Title;
         keyManager = new KeyManager( );
+        mouseManager = new MouseManager( );
     }
     private void init  ( ) /// se va apela o singura data, va initializa display, fereastra si tot ce trebe
     {
+        Assets.init(); /// optimizare
+        handler = new Handler(this);
         gameState = new GameState(handler);
         MenuState= new MenuState(handler);
         State.SetState(gameState);
-        Assets.init(); /// optimizare
-        gameCamera = new GameCamera(this,0,0);
-        handler = new Handler(this);
+        gameCamera = new GameCamera(handler,0,0);
 /// Game Loop
         /// Mai intai se face update la variabile, locatii, obiecte and so on
         /// Apoi pune totul in fereastra
         /// Dupa o ia de la capat, update, draw ....
         Display = new Display( Title,width,height ); /// cand se creeaza o instanta Game o sa fie creat si display-ul
         Display.getFrame( ).addKeyListener(keyManager);
+        Display.getFrame( ).addMouseListener(mouseManager);
+        Display.getFrame( ).addMouseMotionListener(mouseManager);
+        Display.getCanvas( ).addMouseListener(mouseManager);
+        Display.getCanvas( ).addMouseMotionListener(mouseManager);
         String current = System.getProperty("user.dir");
       /// TestImage=ImageLoader.LoadImage("../textures/autismo.jpg"); /// importeaza imaginea din folder..
     }
@@ -122,6 +129,10 @@ public class Game implements  Runnable
     public KeyManager getKeyManager( )
     {
         return keyManager;
+    }
+    public MouseManager getMouseManager ( )
+    {
+        return mouseManager;
     }
     public GameCamera getGameCamera( )
     {
