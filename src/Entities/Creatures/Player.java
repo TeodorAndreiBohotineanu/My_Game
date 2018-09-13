@@ -17,7 +17,6 @@ public class Player extends  Creature {
     private Animation animLadder;
     private Animation animAttackRight;
     private Animation animAttackLeft;
-    protected boolean falling = true;
     private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown;
     public Player(Handler handler, float x, float y)
     {
@@ -65,17 +64,17 @@ public class Player extends  Creature {
             ar.x = cb.x + cb.width / 2 + arSize / 2;
             ar.y = cb.y - arSize;
         }
-       else if (handler.getKeyManager( ).aDown)
+        else if (handler.getKeyManager( ).aDown)
         {
             ar.x = cb.x + cb.width / 2 + arSize / 2;
             ar.y = cb.y + cb.height;
         }
-       else if (handler.getKeyManager( ).aLeft)
+        else if (handler.getKeyManager( ).aLeft)
         {
             ar.x = cb.x - arSize;
             ar.y = cb.y + cb.height / 2 - arSize / 2;
         }
-       else if (handler.getKeyManager( ).aRight)
+        else if (handler.getKeyManager( ).aRight)
         {
             ar.x = cb.x + cb.width;
             ar.y = cb.y + cb.height / 2 - arSize / 2;
@@ -114,17 +113,14 @@ public class Player extends  Creature {
     }
     private void fall ( )
     {
-        while (!falling)
-        {
             Entity e = this;
-            while (!e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(x, y)))
+            if (!e.checkEntityCollisions(x, y))
             {
                 canJump = false;
-                yMove = Speed * 3;
+                while (!e.checkEntityCollisions(x,y))
+                    yMove= Speed * 3;
             }
-            falling = true;
             canJump = true;
-        }
     }
     @Override
     public void render(Graphics graph)

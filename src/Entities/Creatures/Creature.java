@@ -22,7 +22,6 @@ public abstract class Creature extends Entity
         super(handler,x, y,width,height); /// super duce la ce am dat extend, aici Entity
         Speed=DEFAULT_SPEED;
         xMove=0;
-        gravity = 0.5f;
         yMove=0;
     }
     public void Move ( )

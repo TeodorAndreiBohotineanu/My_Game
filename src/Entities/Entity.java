@@ -12,13 +12,11 @@ public abstract class Entity
     protected boolean active = true;
     protected Rectangle bounds;
     protected int HP;
-    protected boolean gravity;
-    protected boolean canJump = false;
+    protected boolean canJump = true;
     public static final int DEFAULT_HP=10;
 
     public Entity(Handler handler, float x, float y, int width, int height)
     {
-      ///  gravity = 0.5f;
         this.handler = handler;
         this.x = x;
         this.y = y;
@@ -39,21 +37,20 @@ public abstract class Entity
             }
             if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)))
             {
-                canJump = true;
                 return true;
             }
         }
-            return false;
+        return false;
     }
     public abstract void dead ( );
     public void hurt ( int amt )
     {
-         HP = HP - amt;
-         if (HP <= 0 )
-         {
-             active = false;
-             dead ( );
-         }
+        HP = HP - amt;
+        if (HP <= 0 )
+        {
+            active = false;
+            dead ( );
+        }
     }
     public Rectangle getCollisionBounds (float xOffset, float yOffset )
     {
